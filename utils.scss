@@ -1,0 +1,262 @@
+@import "variables";
+/* 盒子排列mixin */
+
+// 横向盒子
+@mixin rowBox() {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+// 竖向盒子
+@mixin colBox() {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+// 水平垂直居中盒子
+@mixin allMidBox() {
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin rowMidBox(){
+  @include rowBox();
+  //justify-content: center;
+  align-items: center;
+}
+
+@mixin colMidBox(){
+  @include colBox();
+  //justify-content: center;
+  align-items: center;
+}
+
+
+/************************************************************************************/
+
+/* 图片相关mixin */
+
+// 背景图片地址和大小 覆盖
+@mixin bgCover($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+// 给Image标签设置的cover
+@mixin imgCover() {
+  object-fit: cover;
+}
+
+/************************************************************************************/
+
+/**/
+
+
+// 设置盒子的圆角
+@mixin borderRadius($radius) {
+  border-radius: $radius;
+}
+
+// 宽高
+@mixin wh($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+
+
+
+// 字体大小，颜色
+@mixin fontSizeColor($size, $color) {
+  font-size: $size;
+  color: $color;
+}
+
+// 全边框
+@mixin fullBorder($px,$color) {
+  border: $px solid $color;
+}
+
+
+// 创建带padding的border-box
+@mixin genContainer($verPadding,$horPadding) {
+  display: block;
+  box-sizing: border-box;
+  padding: $verPadding $horPadding;
+}
+
+/* p标签不换行且自带省略号 */
+@mixin p_overflow_eli () {
+  display: block;
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* some util css*/
+.mb1 {
+  margin-bottom: 1em;
+}
+.mt1 {
+  margin-top: 1rem;
+}
+.mt105 {
+  margin-top: 1.5rem;
+}
+.mt2 {
+  margin-top: 2rem;
+}
+.ml1 {
+  margin-left: 1rem;
+}
+.mr1 {
+  margin-right: 1rem;
+}
+
+.mb05 {
+  margin-bottom: 0.5em;
+}
+.mt05 {
+  margin-top: 0.5rem;
+}
+.ml05 {
+  margin-left: 0.5rem;
+}
+.mr05 {
+  margin-right: 0.5rem;
+}
+
+/* layouts */
+.l-box__allMid {
+  @include allMidBox();
+}
+
+// 横向盒子且垂直居中
+.l-box__rowMid {
+  @include rowMidBox();
+}
+
+// 竖向盒子且水平居中
+.l-box__verMid {
+  @include colMidBox();
+}
+
+// 横向排列item的盒子
+.l-box__row{
+  @include rowBox();
+}
+
+/* 字体 */
+
+/* typefaces 28 18 16 14 12*/
+.t1 {
+  font-size: 28px;
+}
+
+.t2 {
+  font-size: 18px;
+}
+
+.t3 {
+  font-size: 16px;
+}
+
+.t4 {
+  font-size: 14px;
+}
+
+.t5 {
+  font-size: 12px;
+}
+
+.t_light {
+  font-weight: 300;
+}
+
+.t_normal {
+  font-weight: 400;
+}
+
+.t_bold {
+  font-weight: 600;
+}
+
+/* .字体大小(t1~t5)-颜色(c1~c5)__字体粗细(light/normal/bold) 如: .t3-c2__bold*/
+@for $i from 1 through 5 {
+  .t#{$i} {
+    &-white {
+      @extend .t#{$i};
+      color: $white;
+      &__light {
+        @extend .t_light;
+      }
+      &__normal {
+        @extend .t_normal;
+      }
+      &__bold {
+        @extend .t_bold;
+      }
+    }
+    &-red {
+      @extend .t#{$i};
+      color: $red;
+      &__light {
+        @extend .t_light;
+      }
+      &__normal {
+        @extend .t_normal;
+      }
+      &__bold {
+        @extend .t_bold;
+      }
+    }
+    &-black {
+      @extend .t#{$i};
+      color: $fontClr_main;
+      &__light {
+        @extend .t_light;
+      }
+      &__normal {
+        @extend .t_normal;
+      }
+      &__bold {
+        @extend .t_bold;
+      }
+    }
+    &-c1 {
+      @extend .t#{$i};
+      color: $fontClr_1st
+    }
+    &-c2 {
+      @extend .t#{$i};
+      color: $fontClr_2nd;
+    }
+    &-c3 {
+      @extend .t#{$i};
+      color: $fontClr_3rd
+    }
+    &-c4 {
+      @extend .t#{$i};
+      color: $fontClr_4th;
+    }
+    @for $j from 1 through 4 {
+      &-c#{$j} {
+        &__light {
+          @extend .t#{$i}-c#{$j};
+          @extend .t_light;
+        }
+        &__normal {
+          @extend .t#{$i}-c#{$j};
+          @extend .t_normal;
+        }
+        &__bold {
+          @extend .t#{$i}-c#{$j};
+          @extend .t_bold;
+        }
+      }
+    }
+  }
+}
